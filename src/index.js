@@ -1,4 +1,7 @@
 import app from './app.js';
+import {run} from './db.js';
+
+run().catch(console.dir);
 
 app.listen(3000)
 
