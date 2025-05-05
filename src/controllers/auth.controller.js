@@ -27,10 +27,38 @@ export const register = async (req, res) => {
     });
     
   } catch (error) {
-    console.error(error);
+    res.status(500).json({
+      message: 'Error creating user',
+      error: error.message,
+    });
   }
 };
 
-export const login = (req, res) => {
-  res.send('login 1');
+export const login = async (req, res) => {
+    const { email, password } = req.body;
+    
+    try {
+        const userFound = await User.findOne({ email }); 
+        if (!userFound) return res.status(400).json({ message: 'User not found' });
+        const isMarch = await bcrypt.compare(password, userFound.password);
+        if (!isMarch) return res.status(401).json({ message: 'Invalid credentials' });
+        
+        const token = await crateToken({ id: userFound._id });
+
+        res.cookie('token', token);
+        res.json({
+            id: userFound._id,
+            username: userFound.username,
+            email: userFound.email,
+            createAt: userFound.createdAt,
+            upfatedAt: userFound.updatedAt, 
+        });
+
+    }catch (error) {
+        res.status(500).json({
+            message: 'Error logging in',
+            error: error.message,
+        });
+    }        
 };
+
