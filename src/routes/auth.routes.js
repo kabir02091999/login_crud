@@ -10,7 +10,7 @@ Routes.post('/login' , login);
 Routes.post('/register', register);
 Routes.post('/logout', logout);
 Routes.get('/profile', authRequired ,profile);
-Routes.get('/tasks', authRequired , Tasks);
+/* Routes.get('/tasks', authRequired , Tasks); */
 
 
 export default Routes;

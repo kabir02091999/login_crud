@@ -10,9 +10,12 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());    
 
-app.use("/api" , authRoutes)
-/* app.use("/api" , tasksRoute) */
+app.use("/api" , authRoutes);
+app.use("/api" , tasksRoute);
 
 export default app;
+
+/*  "email": "kabir.11@gmail.com",
+        "password":"hola7" */
 
 /* z9lXOWbSmBVr6Fdg */
