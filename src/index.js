@@ -1,6 +1,9 @@
 import app from './app.js';
 import {connectDB} from './db.js';
 
+import cors from 'cors';
+
+app.use(cors())
 connectDB()
 app.listen(3000)
 
