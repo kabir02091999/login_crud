@@ -1,5 +1,5 @@
 import { createContext, useState , useContext } from "react";
-import { registrarUsuario } from "../api/auth";
+import { registrarUsuario ,iniciarSesion} from "../api/auth";
 import { set } from "mongoose";
 
 export const AuthContext = createContext()
@@ -24,14 +24,27 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true)
       setError(null)
     } catch (error) {
-      console.log(error.response.data)
+      console.log(error.response.data, " singup")
       setError(error.response.data)
       
     }
-  }        
+  } 
+  
+  const iniciasecion = async (user) => {
+    try {
+      const response = await iniciarSesion(user)
+      console.log(response)
+      setUser(response.data)
+      setIsAuthenticated(true)
+      setError(null)
+    } catch (error) {
+      console.log(error.response.data, " inicion de sesion")
+      setError(error.response.data)    
+    }
+  }
 
   return (
-    <AuthContext.Provider value={{ signup, user , isAuthenticated , error }}>
+    <AuthContext.Provider value={{ signup, user , isAuthenticated , iniciasecion , error }}>
       {children}
     </AuthContext.Provider>
   )
