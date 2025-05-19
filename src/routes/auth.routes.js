@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-import { login ,register ,logout , profile , Tasks} from '../controllers/auth.controller.js';
+import { login ,register ,logout , profile , Tasks , verifyToken} from '../controllers/auth.controller.js';
 
 import { authRequired } from '../middlewares/validateToke.js';
 import {validateSchema} from '../middlewares/validator.middleware.js';
@@ -13,6 +13,7 @@ Routes.post('/login' , validateSchema(loginSchema) , login);
 Routes.post('/register', validateSchema(registerSchema) , register);
 Routes.post('/logout', logout);
 Routes.get('/profile', authRequired ,profile);
+Routes.get('/verify-token', verifyToken);
 /* Routes.get('/tasks', authRequired , Tasks); */
 
 

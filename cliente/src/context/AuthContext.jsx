@@ -1,6 +1,9 @@
-import { createContext, useState , useContext } from "react";
-import { registrarUsuario ,iniciarSesion} from "../api/auth";
+import { createContext, useState , useContext , useEffect } from "react";
+import { registrarUsuario ,iniciarSesion, VerificarToken} from "../api/auth";
 import { set } from "mongoose";
+
+import cookie from 'js-cookie';
+import { use } from "react";
 
 export const AuthContext = createContext()
 
@@ -42,6 +45,22 @@ export const AuthProvider = ({ children }) => {
       setError(error.response.data)    
     }
   }
+
+  useEffect(() => {
+    const token = cookie.get('token')
+    console.log(token , " token")
+    if(token) {
+      VerificarToken()
+        .then((response) => {
+          setUser(response.data)
+          setIsAuthenticated(true)
+        })
+        .catch((error) => {
+          console.log(error)
+          setIsAuthenticated(false)
+        })
+    }
+  }, [])
 
   return (
     <AuthContext.Provider value={{ signup, user , isAuthenticated , iniciasecion , error }}>

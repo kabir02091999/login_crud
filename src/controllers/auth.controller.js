@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {crateToken} from '../libs/jwt.js';
 
+import { TOKEN_SECRET } from '../config.js';
+
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -89,3 +91,20 @@ export const profile = async (req, res) => {
 export const Tasks = (req, res) => {
     res.send('Tasks');
 }
+
+export const verifyToken = async (req, res) => {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ message: 'No token provided' });
+    jwt.verify(token, TOKEN_SECRET, async (err, user) => {
+        
+      if (err) return res.status(403).json({ message: 'Invalid token' });
+       const userFound = await User.findById(user.id);
+       if(!userFound) return res.status(400).json({ message: 'User not found' });  
+      return res.json({
+        id: userFound._id,
+        username: userFound.username,
+        email: userFound.email,
+         
+      });
+    });
+};
