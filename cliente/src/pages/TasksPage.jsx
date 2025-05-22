@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Navigate } from "react-router";
+
 function TasksPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
@@ -10,6 +12,12 @@ function TasksPage() {
         <p className="text-gray-400 text-center">
           tasks
         </p>
+        <div className="mt-4 text-center text-gray-500">
+          ¿No tienes una cuenta?{" "}
+          <a href="/add-task" className="text-indigo-400 hover:underline">
+            Regístrate
+          </a>
+        </div>
       </div>
     </div>
   );

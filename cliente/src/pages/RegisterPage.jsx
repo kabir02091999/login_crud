@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 
 function RegisterPage() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { signup , user , isAuthenticated , error: RegisterError} = useAuth()
+    const { signup , user , isAuthenticated , errors: RegisterError} = useAuth()
     const navigate = useNavigate()
 
     console.log(user)
@@ -27,11 +27,11 @@ function RegisterPage() {
             navigate("/tasks");
         }
     }, [isAuthenticated]);
-
+    console.log(RegisterError , " RegisterError")
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
       {
-      RegisterError.map((error,i) => ( <div className="bg-red-500 p-2 text-white" key={i}>
+      RegisterError && RegisterError.map((error,i) => ( <div className="bg-red-500 p-2 text-white" key={i}>
 
         {error}
 
