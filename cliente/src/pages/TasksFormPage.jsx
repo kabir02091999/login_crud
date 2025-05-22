@@ -3,15 +3,20 @@ import { useTasks } from "../context/TasksContext";
 
 import { useForm } from "react-hook-form";
 
+import { useNavigate } from "react-router";
+
 function TasksFormPage() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { tasks ,   CreateTask  } = useTasks();
+
+     const navigate = useNavigate()
     /* console.log(tasks, "tasks"); */
     const onSubmit = (data) => {
         //console.log(tasks);
         // Aquí puedes enviar los datos al servidor o realizar cualquier otra acción
         CreateTask(data);
+        navigate("/tasks");
       }
 
   return (

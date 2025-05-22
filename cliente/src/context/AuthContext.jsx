@@ -72,10 +72,9 @@ export const AuthProvider = ({ children }) => {
   // src/context/AuthContext.jsx
 import { createContext, useState, useContext, useEffect } from "react";
 import { registrarUsuario, iniciarSesion, VerificarToken } from "../api/auth";
-// import { set } from "mongoose"; // <-- Elimina esto si está
 
 import cookie from 'js-cookie';
-// import { use } from "react"; // <-- ¡Elimina esto!
+
 
 export const AuthContext = createContext();
 

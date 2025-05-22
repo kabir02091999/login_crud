@@ -1,6 +1,18 @@
-import React from "react";
+import React , { useEffect }from "react";
+
+import { useTasks } from "../context/TasksContext";
+import { use } from "react";
 
 function ProfilePage() {
+
+    const { tasks , getasks } = useTasks();
+
+useEffect(() => {
+    console.log(" ejecucion ")
+    getasks();
+}
+, []);
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
