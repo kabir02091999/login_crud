@@ -143,7 +143,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // Función de logout
+    // Función de logout salir de la sesión
     const logout = () => {
         cookie.remove('token'); // Eliminar la cookie
         setUser(null);
