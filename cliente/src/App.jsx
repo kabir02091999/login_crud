@@ -11,6 +11,7 @@ import TasksFormPage from "./pages/TasksFormPage";
 import TasksPage from "./pages/TasksPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
+import Navbar from "./components/navbar";
 
 import ProtectedRoute from "./ProtectedRouter";
 
@@ -26,7 +27,9 @@ function App() {
             <Route path="/login" element={<LoginPage/> } />
             <Route path="/register" element={<RegisterPage/>} />
             
-            <Route element={<ProtectedRoute/>}> 
+            <Route element={<ProtectedRoute/>}>
+              
+              {/* Aquí puedes agregar más rutas protegidas */} 
               <Route path="/tasks" element={<TasksPage/>  } />
               <Route path="/add-task" element={<TasksFormPage/>} />
               <Route path="/edit-task/:id" element={<TasksFormPage/>} />

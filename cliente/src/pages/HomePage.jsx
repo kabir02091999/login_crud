@@ -10,6 +10,18 @@ function HomePage() {
         <p className="text-gray-400 text-center">
           homepage
         </p>
+        <div className="mt-4 text-center text-gray-500">
+          ¿No tienes una cuenta?{" "}
+          <a href="/register" className="text-indigo-400 hover:underline">
+            Regístrate
+          </a>
+        </div>
+        <div className="mt-4 text-center text-gray-500">
+          ¿Ya tienes una cuenta?{" "}
+          <a href="/login" className="text-indigo-400 hover:underline">
+            Iniciar Sesión
+          </a>
+        </div>
       </div>
     </div>
   );

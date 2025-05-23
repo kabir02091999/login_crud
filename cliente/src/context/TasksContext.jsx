@@ -1,7 +1,7 @@
 import { createContext , useContext, useState} from "react";
 
 //api
-import {createTask , getTasks , deleteTask} from "../api/tasks";
+import {createTask , getTasks , deleteTask ,updateTask} from "../api/tasks";
 
 const tasksContext = createContext();
 
@@ -56,8 +56,20 @@ export function TasksProvider({ children }) {
         }
     }
 
+    const EditTask = async (id, task) => {
+        try {
+            const response = await updateTask(id, task);
+            console.log(response.data, " response");
+            setTasks(tasks.map((task) => (task.id === id ? response.data : task)));
+            setErrors([])
+        } catch (error) {
+            console.error(error.response?.data || error);
+            setErrors(error.response?.data?.message || ['Error al editar la tarea']);
+        }
+    }
+
   return (
-    <tasksContext.Provider value={{ tasks, CreateTask , getasks ,errors,DeleteTask}}> {/* tasks, loading, error */}
+    <tasksContext.Provider value={{ tasks, CreateTask , getasks ,errors,DeleteTask ,EditTask}}> {/* tasks, loading, error */}
       {children}
     </tasksContext.Provider>
   );
